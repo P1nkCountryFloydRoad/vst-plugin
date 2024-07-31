@@ -191,10 +191,10 @@ void IIRFilterAudioProcessor::setStateInformation (const void* data, int sizeInB
 // This creates new instances of the plugin..
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
-    double b0 = 0.2066;
+    double b0 = 0.05269197;
     double b1 = 0.0;
-    double b2 = -0.2066;
-    double a1 = -0.3695;
-    double a2 = 0.5868;
+    double b2 = -0.05269197;
+    double a1 = -1.89292236;
+    double a2 = 0.89461607;
     return new IIRFilterAudioProcessor(b0, b1, b2, a1, a2);
 }

@@ -37,7 +37,7 @@ public:
         // 计算当前输出信号
         double y = b0 * x + b1 * x1 + b2 * x2 - a1 * y1 - a2 * y2;
         // 更新历史值
-        x2 = x1;
+x        x2 = x1;
         x1 = x;
         y2 = y1;
         y1 = y;
