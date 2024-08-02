@@ -53,6 +53,7 @@ bool DistortionAudioProcessor::producesMidi() const
    #endif
 }
 
+
 bool DistortionAudioProcessor::isMidiEffect() const
 {
    #if JucePlugin_IsMidiEffect
@@ -157,11 +158,10 @@ void DistortionAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         for (int sample = 0; sample < buffer.getNumSamples(); ++sample)
         {
             // 硬剪切失真
-            if (channelData[sample] != 0.f)
-            {
-                std::cout << "channelData[sample] = " << channelData[sample] << std::endl;
-            }
-            channelData[sample] = hardClip(channelData[sample], threshold);
+           if (hardSoft)
+                channelData[sample] = hardClip(channelData[sample], threshold);
+           else 
+                channelData[sample] = softClip(channelData[sample], threshold);
         }
     }
 }
@@ -197,3 +197,5 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new DistortionAudioProcessor();
 }
+
+

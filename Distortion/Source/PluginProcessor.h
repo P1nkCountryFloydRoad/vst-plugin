@@ -17,6 +17,7 @@ class DistortionAudioProcessor  : public juce::AudioProcessor
 {
 public:
     float threshold = 0.5;
+    bool hardSoft = true;
     //==============================================================================
     DistortionAudioProcessor();
     ~DistortionAudioProcessor() override;
@@ -28,6 +29,18 @@ public:
         }
         else if (input < -threshold){
             return -threshold;
+        }
+        else{
+            return input;
+        }
+    }
+    // 软剪切失真
+    float softClip(float input, float threshold){ // tanh(x)
+        if (input > threshold){
+            return 1 - exp(-input);
+        }
+        else if (input < -threshold){
+            return -1 + exp(input);
         }
         else{
             return input;

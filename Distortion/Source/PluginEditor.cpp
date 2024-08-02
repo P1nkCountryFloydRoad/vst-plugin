@@ -15,15 +15,22 @@ DistortionAudioProcessorEditor::DistortionAudioProcessorEditor (DistortionAudioP
 {
     setSize (300, 300);
 
-    // 设置 Slider 的属性
+    // 阈值滑块
     thresholdSlider.setSliderStyle (juce::Slider::LinearBarVertical);
     thresholdSlider.setRange (0.0, 0.1, 0.001);
     thresholdSlider.setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
     thresholdSlider.setPopupDisplayEnabled (true, false, this);
     thresholdSlider.setTextValueSuffix (" Threshold");
-    thresholdSlider.setValue(0.5f);
+    thresholdSlider.setValue(0.05f);
     addAndMakeVisible(&thresholdSlider);
-    thresholdSlider.addListener(this);
+    // 硬/软剪切切换按钮
+    hardSoftToggle.setButtonText("Hard/Soft");
+    hardSoftToggle.setClickingTogglesState(true);
+    hardSoftToggle.addListener(this);
+    hardSoftToggle.setColour(juce::ToggleButton::textColourId, juce::Colours::black);
+    hardSoftToggle.setColour(juce::ToggleButton::tickColourId, juce::Colours::black);
+    hardSoftToggle.setColour(juce::ToggleButton::tickDisabledColourId, juce::Colours::black);
+    addAndMakeVisible(&hardSoftToggle);
 
 }
 
@@ -34,6 +41,11 @@ DistortionAudioProcessorEditor::~DistortionAudioProcessorEditor()
 void DistortionAudioProcessorEditor::sliderValueChanged (juce::Slider* slider)
 {
   audioProcessor.threshold = thresholdSlider.getValue();
+}
+
+void DistortionAudioProcessorEditor::buttonClicked (juce::Button* button)
+{
+  audioProcessor.hardSoft = !audioProcessor.hardSoft;
 }
 
 //==============================================================================
@@ -49,4 +61,5 @@ void DistortionAudioProcessorEditor::paint (juce::Graphics& g)
 void DistortionAudioProcessorEditor::resized()
 {
     thresholdSlider.setBounds(10, 10, 20, getHeight() - 20);
+    hardSoftToggle.setBounds(100, 10, 100, getHeight() - 20);
 }
