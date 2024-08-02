@@ -13,37 +13,26 @@
 //==============================================================================
 /**
 */
-class IIRFilterAudioProcessor  : public juce::AudioProcessor
+class DistortionAudioProcessor  : public juce::AudioProcessor
 {
 public:
+    float threshold = 0.5;
     //==============================================================================
-    IIRFilterAudioProcessor();
-    
-    IIRFilterAudioProcessor(double b0, double b1, double b2, double a1, double a2)
-      : b0(b0), b1(b1), b2(b2), a1(a1), a2(a2), x1(0), x2(0), y1(0), y2(0)
-    #ifndef JucePlugin_PreferredChannelConfigurations
-     , AudioProcessor (BusesProperties()
-                      #if ! JucePlugin_IsMidiEffect
-                      #if ! JucePlugin_IsSynth
-                       .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
-                      #endif
-                       .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
-                     #endif
-                       )
-    #endif
-       {}
-
-    double process(double x) {
-        // 计算当前输出信号
-        double y = b0 * x + b1 * x1 + b2 * x2 - a1 * y1 - a2 * y2;
-        // 更新历史值
-        ;x2 = x1;
-        x1 = x;
-        y2 = y1;
-        y1 = y;
-        return y;
+    DistortionAudioProcessor();
+    ~DistortionAudioProcessor() override;
+    //==============================================================================
+    // 硬剪切失真
+    float hardClip(float input, float threshold){
+        if (input > threshold){
+            return threshold;
+        }
+        else if (input < -threshold){
+            return -threshold;
+        }
+        else{
+            return input;
+        }
     }
-    ~IIRFilterAudioProcessor() override;
 
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
@@ -79,9 +68,7 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
 private:
-    double b0, b1, b2, a1, a2; // 滤波器系数
-    double x1, x2;             // 上两个输入信号
-    double y1, y2;             // 上两个输出信号
+    
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (IIRFilterAudioProcessor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DistortionAudioProcessor)
 };
