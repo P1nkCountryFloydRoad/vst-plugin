@@ -7,45 +7,18 @@
 */
 
 #pragma once
-#include "SpectrumAnalyserTutorial_02.h"
+
 #include <JuceHeader.h>
 
 //==============================================================================
 /**
 */
-class DistortionAudioProcessor  : public juce::AudioProcessor
+class FFTAudioProcessor  : public juce::AudioProcessor
 {
 public:
-    float threshold = 0.5;
-    bool hardSoft = true;
     //==============================================================================
-    DistortionAudioProcessor();
-    ~DistortionAudioProcessor() override;
-    //==============================================================================
-    // 硬剪切失真
-    float hardClip(float input, float threshold){
-        if (input > threshold){
-            return threshold;
-        }
-        else if (input < -threshold){
-            return -threshold;
-        }
-        else{
-            return input;
-        }
-    }
-    // 软剪切失真
-    float softClip(float input, float threshold){ // tanh(x)
-        if (input > threshold){
-            return 1 - exp(-input);
-        }
-        else if (input < -threshold){
-            return -1 + exp(input);
-        }
-        else{
-            return input;
-        }
-    }
+    FFTAudioProcessor();
+    ~FFTAudioProcessor() override;
 
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
@@ -81,7 +54,6 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
 private:
-    
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DistortionAudioProcessor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FFTAudioProcessor)
 };
