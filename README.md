@@ -9,9 +9,19 @@
 ## Vst-plugins
 couple of plugins including
 - Distortion
+  - Dry-wet
+  - Level
+  - Gain
 - Reverb
+  - Dry-wet
+  - High
+  - Low
+  - Mid
 - Delay
+  - Delay time
 - Fuzz
+  - Level
+  - Gain
 - *Shoegaze
 - *Dreampop
 ## Plugin Host
