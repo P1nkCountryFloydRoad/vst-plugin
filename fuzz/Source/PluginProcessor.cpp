@@ -8,10 +8,9 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
-#include "SpectrumAnalyserTutorial_02.h"
 
 //==============================================================================
-DistortionAudioProcessor::DistortionAudioProcessor()
+FuzzAudioProcessor::FuzzAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
      : AudioProcessor (BusesProperties()
                      #if ! JucePlugin_IsMidiEffect
@@ -23,20 +22,19 @@ DistortionAudioProcessor::DistortionAudioProcessor()
                        )
 #endif
 {
-
 }
 
-DistortionAudioProcessor::~DistortionAudioProcessor()
+FuzzAudioProcessor::~FuzzAudioProcessor()
 {
 }
 
 //==============================================================================
-const juce::String DistortionAudioProcessor::getName() const
+const juce::String FuzzAudioProcessor::getName() const
 {
     return JucePlugin_Name;
 }
 
-bool DistortionAudioProcessor::acceptsMidi() const
+bool FuzzAudioProcessor::acceptsMidi() const
 {
    #if JucePlugin_WantsMidiInput
     return true;
@@ -45,7 +43,7 @@ bool DistortionAudioProcessor::acceptsMidi() const
    #endif
 }
 
-bool DistortionAudioProcessor::producesMidi() const
+bool FuzzAudioProcessor::producesMidi() const
 {
    #if JucePlugin_ProducesMidiOutput
     return true;
@@ -54,8 +52,7 @@ bool DistortionAudioProcessor::producesMidi() const
    #endif
 }
 
-
-bool DistortionAudioProcessor::isMidiEffect() const
+bool FuzzAudioProcessor::isMidiEffect() const
 {
    #if JucePlugin_IsMidiEffect
     return true;
@@ -64,50 +61,50 @@ bool DistortionAudioProcessor::isMidiEffect() const
    #endif
 }
 
-double DistortionAudioProcessor::getTailLengthSeconds() const
+double FuzzAudioProcessor::getTailLengthSeconds() const
 {
     return 0.0;
 }
 
-int DistortionAudioProcessor::getNumPrograms()
+int FuzzAudioProcessor::getNumPrograms()
 {
     return 1;   // NB: some hosts don't cope very well if you tell them there are 0 programs,
                 // so this should be at least 1, even if you're not really implementing programs.
 }
 
-int DistortionAudioProcessor::getCurrentProgram()
+int FuzzAudioProcessor::getCurrentProgram()
 {
     return 0;
 }
 
-void DistortionAudioProcessor::setCurrentProgram (int index)
+void FuzzAudioProcessor::setCurrentProgram (int index)
 {
 }
 
-const juce::String DistortionAudioProcessor::getProgramName (int index)
+const juce::String FuzzAudioProcessor::getProgramName (int index)
 {
     return {};
 }
 
-void DistortionAudioProcessor::changeProgramName (int index, const juce::String& newName)
+void FuzzAudioProcessor::changeProgramName (int index, const juce::String& newName)
 {
 }
 
 //==============================================================================
-void DistortionAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
+void FuzzAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
 }
 
-void DistortionAudioProcessor::releaseResources()
+void FuzzAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
-bool DistortionAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
+bool FuzzAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
 {
   #if JucePlugin_IsMidiEffect
     juce::ignoreUnused (layouts);
@@ -132,7 +129,7 @@ bool DistortionAudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
 }
 #endif
 
-void DistortionAudioProcessor::processBlock (juce::AudioBuffer<float>& buf fer, juce::MidiBuffer& midiMessages)
+void FuzzAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
@@ -156,37 +153,44 @@ void DistortionAudioProcessor::processBlock (juce::AudioBuffer<float>& buf fer, 
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
         auto* channelData = buffer.getWritePointer (channel);
-        for (int sample = 0; sample < buffer.getNumSamples(); ++sample)
+
+         for (int sample = 0; sample < buffer.getNumSamples(); ++sample)
         {
-            // 硬剪切失真
-           if (hardSoft)
-                channelData[sample] = hardClip(channelData[sample], threshold);
-           else 
-                channelData[sample] = softClip(channelData[sample], threshold);
-        } X
+            float cleanSample = channelData[sample] * gain;
+
+            float distortedSample = cleanSample * (fabsf(cleanSample) + 1.0f) / (fabsf(cleanSample) + 0.1f);
+
+            channelData[sample] = distortedSample;
+        }
+    }
+
+    // 处理多余的输出通道
+    for (int channel = totalNumInputChannels; channel < totalNumOutputChannels; ++channel)
+    {
+        buffer.clear(channel, 0, buffer.getNumSamples());
     }
 }
 
 //==============================================================================
-bool DistortionAudioProcessor::hasEditor() const
+bool FuzzAudioProcessor::hasEditor() const
 {
     return true; // (change this to false if you choose to not supply an editor)
 }
 
-juce::AudioProcessorEditor* DistortionAudioProcessor::createEditor()
+juce::AudioProcessorEditor* FuzzAudioProcessor::createEditor()
 {
-    return new DistortionAudioProcessorEditor (*this);
+    return new FuzzAudioProcessorEditor (*this);
 }
 
 //==============================================================================
-void DistortionAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
+void FuzzAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
 }
 
-void DistortionAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
+void FuzzAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
@@ -196,7 +200,5 @@ void DistortionAudioProcessor::setStateInformation (const void* data, int sizeIn
 // This creates new instances of the plugin..
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
-    return new DistortionAudioProcessor();
+    return new FuzzAudioProcessor();
 }
-
-

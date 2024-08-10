@@ -21,7 +21,7 @@ couple of plugins including
   - Delay time
 - Fuzz
   - Level
-  - Gain
+  - Gai
 - *Shoegaze
 - *Dreampop
 ## Plugin Host
