@@ -8,7 +8,7 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
-#include "SpectrumAnalyserTutorial_02.h"
+// #include "SpectrumAnalyserTutorial_02.h"
 
 //==============================================================================
 DistortionAudioProcessorEditor::DistortionAudioProcessorEditor (DistortionAudioProcessor& p)
@@ -34,7 +34,7 @@ DistortionAudioProcessorEditor::DistortionAudioProcessorEditor (DistortionAudioP
     addAndMakeVisible(&hardSoftToggle);
 
     // 示波器组件
-    addAndMakeVisible (analyserComponent);
+    // addAndMakeVisible (analyserComponent);
 
 }
 
@@ -66,5 +66,5 @@ void DistortionAudioProcessorEditor::resized()
 {
     thresholdSlider.setBounds(10, 10, 20, getHeight() - 50);
     hardSoftToggle.setBounds(30, 10, 100, getHeight() - 50);
-    analyserComponent.setBounds (0, 0, getWidth(), getHeight());
+    // analyserComponent.setBounds (0, 0, getWidth(), getHeight());
 }

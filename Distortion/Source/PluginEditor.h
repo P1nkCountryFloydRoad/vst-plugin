@@ -10,7 +10,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
-#include "SpectrumAnalyserTutorial_02.h"
+// #include "SpectrumAnalyserTutorial_02.h"
 
 //==============================================================================
 /**
@@ -36,6 +36,6 @@ private:
     juce::Slider thresholdSlider;
     juce::Slider thresholdSlider1;
     juce::ToggleButton hardSoftToggle;
-    AnalyserComponent analyserComponent;
+    // AnalyserComponent analyserComponent;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DistortionAudioProcessorEditor)
 };

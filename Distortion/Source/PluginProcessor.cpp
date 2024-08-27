@@ -8,7 +8,7 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
-#include "SpectrumAnalyserTutorial_02.h"
+// #include "SpectrumAnalyserTutorial_02.h"
 
 //==============================================================================
 DistortionAudioProcessor::DistortionAudioProcessor()
@@ -132,7 +132,7 @@ bool DistortionAudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
 }
 #endif
 
-void DistortionAudioProcessor::processBlock (juce::AudioBuffer<float>& buf fer, juce::MidiBuffer& midiMessages)
+void DistortionAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
@@ -163,7 +163,7 @@ void DistortionAudioProcessor::processBlock (juce::AudioBuffer<float>& buf fer, 
                 channelData[sample] = hardClip(channelData[sample], threshold);
            else 
                 channelData[sample] = softClip(channelData[sample], threshold);
-        } X
+        } 
     }
 }
 
