@@ -41,10 +41,10 @@
  #define JucePlugin_Enable_ARA             0
 #endif
 #ifndef  JucePlugin_Name
- #define JucePlugin_Name                   "Chorus"
+ #define JucePlugin_Name                   "chorus"
 #endif
 #ifndef  JucePlugin_Desc
- #define JucePlugin_Desc                   "Chorus"
+ #define JucePlugin_Desc                   "chorus"
 #endif
 #ifndef  JucePlugin_Manufacturer
  #define JucePlugin_Manufacturer           "yourcompany"
@@ -59,7 +59,7 @@
  #define JucePlugin_ManufacturerCode       0x4d616e75
 #endif
 #ifndef  JucePlugin_PluginCode
- #define JucePlugin_PluginCode             0x4e6f6678
+ #define JucePlugin_PluginCode             0x4f633663
 #endif
 #ifndef  JucePlugin_IsSynth
  #define JucePlugin_IsSynth                0
@@ -101,19 +101,19 @@
  #define JucePlugin_AUSubType              JucePlugin_PluginCode
 #endif
 #ifndef  JucePlugin_AUExportPrefix
- #define JucePlugin_AUExportPrefix         ChorusAU
+ #define JucePlugin_AUExportPrefix         chorusAU
 #endif
 #ifndef  JucePlugin_AUExportPrefixQuoted
- #define JucePlugin_AUExportPrefixQuoted   "ChorusAU"
+ #define JucePlugin_AUExportPrefixQuoted   "chorusAU"
 #endif
 #ifndef  JucePlugin_AUManufacturerCode
  #define JucePlugin_AUManufacturerCode     JucePlugin_ManufacturerCode
 #endif
 #ifndef  JucePlugin_CFBundleIdentifier
- #define JucePlugin_CFBundleIdentifier     com.yourcompany.Chorus
+ #define JucePlugin_CFBundleIdentifier     com.yourcompany.chorus
 #endif
 #ifndef  JucePlugin_AAXIdentifier
- #define JucePlugin_AAXIdentifier          com.yourcompany.Chorus
+ #define JucePlugin_AAXIdentifier          com.yourcompany.chorus
 #endif
 #ifndef  JucePlugin_AAXManufacturerCode
  #define JucePlugin_AAXManufacturerCode    JucePlugin_ManufacturerCode
@@ -137,7 +137,7 @@
  #define JucePlugin_IAASubType             JucePlugin_PluginCode
 #endif
 #ifndef  JucePlugin_IAAName
- #define JucePlugin_IAAName                "yourcompany: Chorus"
+ #define JucePlugin_IAAName                "yourcompany: chorus"
 #endif
 #ifndef  JucePlugin_VSTNumMidiInputs
  #define JucePlugin_VSTNumMidiInputs       16
@@ -152,10 +152,10 @@
  #define JucePlugin_ARATransformationFlags  0
 #endif
 #ifndef  JucePlugin_ARAFactoryID
- #define JucePlugin_ARAFactoryID           "com.yourcompany.Chorus.factory"
+ #define JucePlugin_ARAFactoryID           "com.yourcompany.chorus.factory"
 #endif
 #ifndef  JucePlugin_ARADocumentArchiveID
- #define JucePlugin_ARADocumentArchiveID   "com.yourcompany.Chorus.aradocumentarchive.1.0.0"
+ #define JucePlugin_ARADocumentArchiveID   "com.yourcompany.chorus.aradocumentarchive.1.0.0"
 #endif
 #ifndef  JucePlugin_ARACompatibleArchiveIDs
  #define JucePlugin_ARACompatibleArchiveIDs  ""

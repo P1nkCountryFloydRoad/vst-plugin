@@ -30,7 +30,7 @@ void ChorusAudioProcessorEditor::paint (juce::Graphics& g)
 
     g.setColour (juce::Colours::white);
     g.setFont (juce::FontOptions (15.0f));
-    g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
+    g.drawFittedText ("chorus", 10,10,getWidth(),10,juce::Justification::centred, 1);
 }
 
 void ChorusAudioProcessorEditor::resized()

@@ -153,8 +153,7 @@ void ChorusAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
         auto* channelData = buffer.getWritePointer (channel);
-
-        // ..do something to the data...
+        
     }
 }
 
