@@ -8,13 +8,12 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
-// #include "SpectrumAnalyserTutorial_02.h"
 
 //==============================================================================
 DistortionAudioProcessorEditor::DistortionAudioProcessorEditor (DistortionAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p)
 {
-    setSize (800,600);
+    setSize (300, 300);
 
     // 阈值滑块
     thresholdSlider.setSliderStyle (juce::Slider::LinearBarVertical);
@@ -32,9 +31,6 @@ DistortionAudioProcessorEditor::DistortionAudioProcessorEditor (DistortionAudioP
     hardSoftToggle.setColour(juce::ToggleButton::tickColourId, juce::Colours::black);
     hardSoftToggle.setColour(juce::ToggleButton::tickDisabledColourId, juce::Colours::black);
     addAndMakeVisible(&hardSoftToggle);
-
-    // 示波器组件
-    // addAndMakeVisible (analyserComponent);
 
 }
 
@@ -64,7 +60,6 @@ void DistortionAudioProcessorEditor::paint (juce::Graphics& g)
 
 void DistortionAudioProcessorEditor::resized()
 {
-    thresholdSlider.setBounds(10, 10, 20, getHeight() - 50);
-    hardSoftToggle.setBounds(30, 10, 100, getHeight() - 50);
-    // analyserComponent.setBounds (0, 0, getWidth(), getHeight());
+    thresholdSlider.setBounds(10, 10, 20, getHeight() - 20);
+    hardSoftToggle.setBounds(100, 10, 100, getHeight() - 20);
 }

@@ -8,7 +8,6 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
-// #include "SpectrumAnalyserTutorial_02.h"
 
 //==============================================================================
 DistortionAudioProcessor::DistortionAudioProcessor()
@@ -163,7 +162,7 @@ void DistortionAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
                 channelData[sample] = hardClip(channelData[sample], threshold);
            else 
                 channelData[sample] = softClip(channelData[sample], threshold);
-        } 
+        }
     }
 }
 
@@ -198,5 +197,4 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new DistortionAudioProcessor();
 }
-
 

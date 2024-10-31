@@ -56,4 +56,7 @@ public:
 private:
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ChorusAudioProcessor)
+    juce::dsp::Oscillator<float> lfo;
+    lfo.initialise ([] (float x) { return std::sin (x); }, 128);
+    lfo.setFrequency(rate);
 };

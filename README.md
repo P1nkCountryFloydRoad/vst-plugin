@@ -30,4 +30,7 @@ Similar to distortion, need to clip the top amplitudes, but through a rather dif
 Using the function, `f(x) = x*(abs(x)+1/abs(x)+0.5)`, it makes the upper signal similar to square-wave-like.
 ## Reverb
 Using comb filters and all-pass filters to create a echo sound.
-## Chorus
+
+---
+# LFO
+**Low-frequency Oscillator**
